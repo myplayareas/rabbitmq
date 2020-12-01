@@ -1,0 +1,2 @@
+# rabbitmq
+Uma das formas de se diminuir o acoplamento entre componentes de uma aplicação é a utilização de um message broker, que é um padrão arquitetural para envio e recebimento de mensagens entre aplicações e componentes. Onde quem envia a mensagem e quem recebe a mensagem não precisam conhecer um ao outro, diminuindo o acoplamento. Existem diversas aplicações que implementam esse padrão, entre elas o RabbitMQ, que implementa o protocolo AMPQ — Advanced Message Queuing Protocol 
