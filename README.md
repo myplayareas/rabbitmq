@@ -1,7 +1,7 @@
 # rabbitmq
 Uma das formas de se diminuir o acoplamento entre componentes de uma aplicação é a utilização de um message broker, que é um padrão arquitetural para envio e recebimento de mensagens entre aplicações e componentes. Onde quem envia a mensagem e quem recebe a mensagem não precisa conhecer um ao outro, diminuindo o acoplamento. 
 
-Existem diversas aplicações que implementam esse padrão, entre elas o RabbitMQ, que implementa o protocolo AMPQ — *Advanced Message Queuing Protocol* 
+Existem diversas aplicações que implementam esse padrão, entre elas o RabbitMQ, que implementa o protocolo AMPQ (*Advanced Message Queuing Protocol*). O protocolo AMQP possibilita pub-sub (publicação/assinatura) e enfileiramento de mensagens assíncronas.
 
 RabbitMQ - https://www.rabbitmq.com
 
@@ -11,7 +11,19 @@ Pika - https://pika.readthedocs.io/en/stable/
 
 ## Como viabilizar uma comunicação assíncrona e independente entre um produtor e dois consumidores?
 
-Exemplo: Broker, Produtor, Consumidor1, Consumidor2
+Exemplo: Broker, Produtor, Consumidor1, Consumidor2, instantantes (t0 < t1 < t2 < t3 < t4 < t5)
+
+t0: Inicializa o Broker: q = []
+
+t1: Produtor->Broker: q = [message1]
+
+t2: Produtor->Broker: q = [message1, message2]
+
+t3: Consumidor1->Broker: q = [message1,message2]
+
+t4: Consumidor2->Broker: q = [message2]
+
+t5: Broker: q = []
 
 ```sequence
 Produtor->Broker: message1
