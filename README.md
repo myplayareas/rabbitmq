@@ -9,6 +9,10 @@ Pika is a pure-Python implementation of the AMQP 0-9-1 protocol that tries to st
 
 Pika - https://pika.readthedocs.io/en/stable/
 
+## Como viabilizar uma comunicação assíncrona e independente entre um produtor e dois consumidores?
+
+Exemplo: Broker, Produtor, Consumidor1, Consumidor2
+
 ```sequence
 Produtor->Broker: message1
 Produtor->Broker: message2
@@ -16,9 +20,9 @@ Consumidor1->Broker: message1
 Consumidor2->Broker: message2
 ```
 
-## Ativar o servidor que ficará responsável pelo controle de mensageria
+### Ativar o servidor que ficará responsável pelo controle de mensageria
 
-Neste caso, existe apenas uma fila de mensagens que será usada para intermediar a produção de mensagem e consumo das mensagens
+Neste caso, existe apenas uma fila de mensagens que será usada para intermediar a produção das mensagens e consumo das mensagens
 
 ```
 # Para rodar com docker, basta rodar a seguinte linha de comando:
@@ -29,26 +33,31 @@ $ docker run --rm -p 5672:5672 -p 8080:15672 rabbitmq:3-management
 # Server1 - Broker
 # http://ip-rabbitmq:8080
 # user: guest, password: guest
+# Crie a fila que vai gerenciar as mensagens
 ```
-## Ativar o servidor (Produtor) que vai produzir as mensagens para a fila
+### Ativar o servidor (Produtor) que vai produzir as mensagens para a fila
 
 ```
 # Server2 - Produtor
 # http://ip-produtor:8080
 $ pip install pika
 $ python produtor.py
+# Produtor->Broker: message1
+# Produtor->Broker: message2
 ```
-## Ativar o servidor (Consumidor 1) que vai consumir as mensagens armazenadas na fila
+### Ativar o servidor (Consumidor 1) que vai consumir as mensagens armazenadas na fila
 ```
 # Server3 - Consumidor1
 # http://ip-consumidor1:8080
 $ pip install pika
 $ python consumidor1.py
+# Consumidor1->Broker: message1
 ```
-## Ativar o servidor (Consumidor 2) que vai consumir as mensagens armazenadas na fila
+### Ativar o servidor (Consumidor 2) que vai consumir as mensagens armazenadas na fila
 ```
 # Server4 - Consumidor2
 # http://ip-consumidor2:8080
 $ pip install pika
 $ python consumidor2.py
+# Consumidor2->Broker: message2
 ```
