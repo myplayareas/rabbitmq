@@ -11,7 +11,7 @@ Pika - https://pika.readthedocs.io/en/stable/
 
 ## Como viabilizar uma comunicação assíncrona e independente entre um produtor e dois consumidores?
 
-Exemplo: Broker, Produtor, Consumidor1, Consumidor2, instantantes (t0 < t1 < t2 < t3 < t4 < t5)
+Exemplo: Broker, Produtor, Consumidor1, Consumidor2, instantantes (t0 < t1 < t2 < t3 < t4 < t5). Como os serviços (Broker, Produtor, Consumidor1 e Consumidor2) rodam em aplicações e processos separados, a comunicação entre eles é feita de forma assíncrona e desacoplada.
 
 t0: Inicializa o Broker: q = []
 
