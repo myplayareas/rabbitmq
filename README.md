@@ -45,7 +45,7 @@ $ docker run --rm -p 5672:5672 -p 8080:15672 rabbitmq:3-management
 # Server1 - Broker
 # http://ip-rabbitmq:8080
 # user: guest, password: guest
-# Crie a fila que vai gerenciar as mensagens
+# Crie a fila (q) que vai gerenciar as mensagens
 ```
 ### Ativar o servidor (Produtor) que vai produzir as mensagens para a fila
 
