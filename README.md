@@ -1,4 +1,5 @@
-# rabbitmq
+# Exemplo de uso do Rabbitmq
+
 Uma das formas de se diminuir o acoplamento entre componentes de uma aplicação é a utilização de um message broker, que é um padrão arquitetural para envio e recebimento de mensagens entre aplicações e componentes. Onde quem envia a mensagem e quem recebe a mensagem não precisa conhecer um ao outro, diminuindo o acoplamento. 
 
 Existem diversas aplicações que implementam esse padrão, entre elas o RabbitMQ, que implementa o protocolo AMPQ (*Advanced Message Queuing Protocol*). O protocolo AMQP possibilita pub-sub (publicação/assinatura) e enfileiramento de mensagens assíncronas.
@@ -32,7 +33,7 @@ Consumidor1->Broker: message1
 Consumidor2->Broker: message2
 ```
 
-### Ativar o servidor que ficará responsável pelo controle de mensageria
+### Ativar o servidor (Broker) que ficará responsável pelo controle de mensageria
 
 Neste caso, existe apenas uma fila de mensagens que será usada para intermediar a produção das mensagens e consumo das mensagens
 
@@ -47,7 +48,7 @@ $ docker run --rm -p 5672:5672 -p 8080:15672 rabbitmq:3-management
 # user: guest, password: guest
 # Crie a fila (q) que vai gerenciar as mensagens
 ```
-### Ativar o servidor (Produtor) que vai produzir as mensagens para a fila
+### Ativar o servidor (Produtor) que vai produzir as mensagens para a fila q
 
 ```
 # Server2 - Produtor
@@ -57,7 +58,7 @@ $ python produtor.py
 # Produtor->Broker: message1
 # Produtor->Broker: message2
 ```
-### Ativar o servidor (Consumidor 1) que vai consumir as mensagens armazenadas na fila
+### Ativar o servidor (Consumidor 1) que vai consumir as mensagens armazenadas na fila q
 ```
 # Server3 - Consumidor1
 # http://ip-consumidor1:8080
@@ -65,7 +66,7 @@ $ pip install pika
 $ python consumidor1.py
 # Consumidor1->Broker: message1
 ```
-### Ativar o servidor (Consumidor 2) que vai consumir as mensagens armazenadas na fila
+### Ativar o servidor (Consumidor 2) que vai consumir as mensagens armazenadas na fila q
 ```
 # Server4 - Consumidor2
 # http://ip-consumidor2:8080
